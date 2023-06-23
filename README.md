@@ -7,8 +7,7 @@
 
 
 > **Resumo**: Projeto de Ciência de dados utilizando Machine Learning - Regression (Time Series) para prever as vendas das próximas 6 semanas de uma loja. O projeto end-to-end > foi realizado com método CRISP-DM e passou pelas seguintes etapas: ETL, Estatistica Descritiva, Feature Engineering, Preparação dos dados 
-> (Enconding, rescalling e transformação), Feature Selection, Treinamento de Machine Learning, Hiperparameter fine Tuning, Tradução e interpretação do erro, deploy, 
-> do modelo em produção e criação de um BOT que mostra os resultados da previsão pelo Telegram.
+> (Enconding, rescalling e transformação), Feature Selection, Treinamento de Machine Learning, Hiperparameter fine Tuning, Tradução e interpretação do erro, deploy do modelo em produção e criação de um BOT que mostra os resultados da previsão pelo Telegram.
 <hr>
 
 
@@ -29,7 +28,12 @@ A construção do projeto foi realizada com a metodologia CRISP-DM, isto é, um 
 </div>
 
 
-**Principais Ferramentas utilizadas:** Python (pandas, math, inflection, numpy, seaborn, matplotlib, tabulate), Machine Learning (XGBoost, random, scipy, sklearn: Random Forest, LinearRegression, Lasso, boruta) Estatística (Skleanin.metrics, RobustScaler, MinMaxScaler, LabelEncoder) API (pickle, request, Flask, json), Render, Telegram, VSCode, Jupyter Notebook
+**Principais Ferramentas utilizadas:** 
+- Python (pandas, math, inflection, numpy, seaborn, matplotlib, tabulate), 
+- Machine Learning (XGBoost, random, scipy, sklearn: Random Forest, LinearRegression, Lasso, boruta) 
+- Estatística (Skleanin.metrics, RobustScaler, MinMaxScaler, LabelEncoder) 
+- API (pickle, request, Flask, json)
+- Render, Telegram, VSCode, Jupyter Notebook
 
 
 ## 3. Premissas 
@@ -86,9 +90,10 @@ Desta forma foi possível analisar 11 hipóteses, dentre elas obtivemos os segui
 
 ## 5. Machine Learning
 
-Para realizar a regressão foi utilizado 5 algoritmos diferentes: Average Model Regressão Linear, Lasso, Random Forest e XGBoost. Sendo um problema de TimeSeries também foi utilizada a técnica de validação cruzada TimeSeries Split para separar os dados de treinamento e os dados de validação dos modelos. 
+Para realizar a regressão foi utilizado 5 algoritmos diferentes: Average Model, Regressão Linear, Lasso, Random Forest e XGBoost. Sendo um problema de TimeSeries também foi utilizada a técnica de validação cruzada TimeSeries Split para separar os dados de treinamento e os dados de validação dos modelos (80% e 20%, respectivamente). 
 
 > Observações: 
+>
 > MAE → A soma da diferença entre o valor real e o valor da predição, dividido pelo numero de valor predito (média do error).
 > 
 > MAPE → É a porcentagem de error do MAE. Mostra o quão longe a predição está do valor real, na média, em porcentagem.
@@ -98,37 +103,84 @@ Para realizar a regressão foi utilizado 5 algoritmos diferentes: Average Model 
 ### Avaliação da performance antes do cross-Validation
 
 <div align="center">
-<img src="https://imgur.com/D2TFxFl.png" />
+<img src="https://imgur.com/kQJBuSU.png" />
 </div><br>
 
 ### Avaliação da performance após o cross-Validation
 
 <div align="center">
-<img src="https://imgur.com/1qtH8Z4.png" />
+<img src="https://imgur.com/RWIJLW0.png" />
 </div><br>
 
 Apesar de não ter apresentado os melhores parâmetros durante essa primeira fase de teste, decidi seguir com o algoritmo XGBoost para fazer a previsão de vendas dos dados. O motivo é devido a capacidade de armazenamento necessária ser muito menor, ser mais rápido para treinar e ajustar comparado ao Random Forest, acarretando um custo mais vantajoso para empresa mantê-lo em funcionamento. De qualquer forma, podemos esperar uma performance melhor depois da etapa de Fine Tunning.
 
 
 ### Final Performance - Hyperparameter Fine Tunning
-
+<div align="center">
+<img src="https://imgur.com/lqpYN36.png" />
 </div><br>
-
-
-<br><br>
+<br>
 
 ## 6. Resultado da Modelagem para o Negócio
 
+Na tabela abaixo podemos ver uma amostra da resposta de predição do nosso modelo. Em 'predictions' mostra o valor absoluto esperado para cada loja. As colunas de "worst_scenario" e "best_scenario" dão uma ideia do valor a esperar se as vendas forem no pior ou melhor cenário, respectivamente. Para facilitar a interpretação, a coluna MAE mostra essa variação (margem de erro) em valor absoluto, e o MAPE representa a mesma variação em porcentagem. 
+Sendo assim, a loja 316 tem o valor de 364.869,28 R$ previsto. No pior cenário esta loja fará 364.134,50 R$ e no melhor 365.584,07 R$. Essa margem de erro representa 724,79 R$ ou 7%. 
+
+Predições totais, resultado no pior cenário, melhor cenário, variação em erro absoluto, variação em porcentagem:
+<div align="center">
+<img src="https://imgur.com/7GzO65n.png" />
+</div><br>
+
+Cenários considerando valor total de todas as lojas (soma total):
+<div align="center">
+<img src="https://imgur.com/IGyu4oY.png" />
+</div><br>
 
 
-<br><br>
+Para visualizar melhor qual é a variação geral dos erros das lojas plotei o gráfico abaixo. É importante observar que a maioria das lojas apresentaram menos de 20% de erro, mas algumas chegaram a mais de 50%. Isso mostra que no próximo ciclo do CRISP-DM temos que avaliar possíveis mudanças para essas lojas mais complexas.
 
-## 7. Conclusão
+Variação dos erros das diferentes lojas:
+<div align="center">
+<img src="https://imgur.com/elMk4Fc.png" />
+</div><br>
+
+Os gráficos abaixo mostram a performance do modelo. No gráfico 1 o valor de predição, ao ser comparado com o valor real das vendas, se mostra vem fiel ao que realmente foi. O gráfico 2 mostra se o modelo subestimou ou superestimou o valor das vendas. Os gráficos 3 e 4 são para fins estatísticos de Machine Learning, e mostram que os erros estão satisfatório. 
+
+Avaliação da performance do modelo em comparação com os valores reais:
+<div align="center">
+<img src="https://imgur.com/UObCKkt.png" />
+</div><br>
+
+<br>
+
+## 7. Entrega e Conclusão
+
+O modelo foi implementado em produção em Cloud por meio da plataforma Render. A fim de facilitar o acesso dessas informações de maneira prática, criei um BOT no Telegram que, ao solicitar o número da loja desejada, o BOT retorna o valor de previsão das próximas 6 semanas. 
+A imagem abaixo mostra como o modelo funciona em relação à interação entre a Cloud, o projeto e o BOT Telegram.
+
+<div align="center">
+<img src="https://imgur.com/U8y0dxU.png" />
+</div><br>
+
+Vídeo do BOT Telegram: 
+
+<div align="center">
+<img src="#" />
+</div><br>
 
 
-<br><br>
+**Como funciona:** é necessário entrar somente um valor de loja após uma barra, por exemplo: /22.
+Se a loja não existir, ou der entrada em caracteres não reconhecido o BOT retorna avisando o equivoco.
+
+Concluindo, acredito que o modelo apresentou resultados satisfatórios em produção para o primeiro ciclo do CRISP-DM, é evidente a necessidade de melhorias para os próximos ciclos, contudo, com essa performance inicial seria possível se planejar para a reforma proposta pelo CFO.
+<br>
 
 ## 8. Próximos passos
+Se tratando de um projeto realizado pelo método CRISP-DM, algumas considerações são importantes para o próximo ciclo: 
 
+- Reavaliar/Criar algumas features a fim de melhorar a acurácia do modelo.
+- Trabalhar com NA de maneira diferente
+- Avaliar se outro modelo apresenta performance melhor que o XGBoost depois do Fine Tunning
+- Testar algum modelo mais complexo para ver se diminui a dificuldade de previsão de algumas lojas (erro > 50%)
 
 

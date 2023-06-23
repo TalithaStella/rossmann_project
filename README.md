@@ -8,6 +8,17 @@
 
 > **Resumo**: Projeto de Ciência de dados utilizando Machine Learning - Regression (Time Series) para prever as vendas das próximas 6 semanas de uma loja. O projeto end-to-end > foi realizado com método CRISP-DM e passou pelas seguintes etapas: ETL, Estatistica Descritiva, Feature Engineering, Preparação dos dados 
 > (Enconding, rescalling e transformação), Feature Selection, Treinamento de Machine Learning, Hiperparameter fine Tuning, Tradução e interpretação do erro, deploy do modelo em produção e criação de um BOT que mostra os resultados da previsão pelo Telegram.
+
+### Índice
+* [1. Problema de negócio](#1-problema-de-negócio)
+* [2. Planejamento](#2-planejamento)
+* [3. Premissas](#3-premissas)
+* [4. Análise Exploratória dos Dados](#4-análise-exploratória-dos-dados)
+* [5. Machine Learning](#5-machine-learning)
+* [6. Resultado da Modelagem para o Negócio](#6-resultado-da-modelagem-para-o-negócio)
+* [7. Entrega e Conclusão](#7-entrega-e-conclusão)
+* [8. Próximos passos](#8-próximos-passos)
+
 <hr>
 
 
@@ -176,6 +187,7 @@ Concluindo, acredito que o modelo apresentou resultados satisfatórios em produ�
 <br>
 
 ## 8. Próximos passos
+
 Se tratando de um projeto realizado pelo método CRISP-DM, algumas considerações são importantes para o próximo ciclo: 
 
 - Reavaliar/Criar algumas features a fim de melhorar a acurácia do modelo.

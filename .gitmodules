@@ -1,0 +1,6 @@
+[submodule "bot_rossmann/telebot_rossmann"]
+	path = bot_rossmann/telebot_rossmann
+	url = https://github.com/TalithaStella/rossmann_project.git
+[submodule "model_api/rossmann_api"]
+	path = model_api/rossmann_api
+	url = https://github.com/TalithaStella/rossmann_project.git

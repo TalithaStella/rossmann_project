@@ -8,6 +8,7 @@
 
 > **Resumo**: Projeto de Ciência de dados utilizando Machine Learning - Regression (Time Series) para prever as vendas das próximas 6 semanas de uma loja. O projeto end-to-end > foi realizado com método CRISP-DM e passou pelas seguintes etapas: ETL, Estatistica Descritiva, Feature Engineering, Preparação dos dados 
 > (Enconding, rescalling e transformação), Feature Selection, Treinamento de Machine Learning, Hiperparameter fine Tuning, Tradução e interpretação do erro, deploy do modelo em produção e criação de um BOT que mostra os resultados da previsão pelo Telegram.
+> Acesso ao bot: t.me/rossmann_TS_bot
 
 ### Índice
 * [1. Problema de negócio](#1-problema-de-negócio)
@@ -176,12 +177,16 @@ A imagem abaixo mostra como o modelo funciona em relação à interação entre 
 Vídeo do BOT Telegram: 
 
 <div align="center">
-<img src="#" />
+<img src="https://i.imgur.com/MFhciAB.gif">
 </div><br>
 
 
-**Como funciona:** é necessário entrar somente um valor de loja após uma barra, por exemplo: /22.
-Se a loja não existir, ou der entrada em caracteres não reconhecido o BOT retorna avisando o equivoco.
+>**Como funciona:** Acesse o link: t.me/rossmann_TS_bot e inicie uma conversa com o comando /start.
+>
+> É necessário entrar somente um valor de loja, por exemplo: 22.
+>
+> Se a loja não existir ou houver caracteres não reconhecido, o BOT retorna avisando o equivoco.
+
 
 Concluindo, acredito que o modelo apresentou resultados satisfatórios em produção para o primeiro ciclo do CRISP-DM, é evidente a necessidade de melhorias para os próximos ciclos, contudo, com essa performance inicial seria possível se planejar para a reforma proposta pelo CFO.
 <br>
